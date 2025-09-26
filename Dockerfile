@@ -1,8 +1,13 @@
-# Usa una imagen oficial de PHP con Apache
 FROM php:8.2-apache
 
-# Copia todo el contenido de tu repo al directorio raíz del servidor
-COPY . /var/www/html/
+# Copiar archivos de public al DocumentRoot
+COPY public/ /var/www/html/
 
-# Expone el puerto 80
-EXPOSE 80
+# Copiar el backend si lo necesitas accesible, ajustar rutas
+COPY backend/ /var/www/html/backend/
+
+# Si tienes assets (css, js, imágenes)
+COPY public/assets/ /var/www/html/assets/
+
+# Enseñar a Apache dónde encontrar el index
+# (opcional si index.php ya está en /var/www/html/)
